@@ -43,7 +43,8 @@ const generateAuthor = () => ({ avatar: `img/avatars/user0${getRandomInteger(1, 
 const generateLocation = () => {
   return {
     x: getRandomLocation(X_COORDINATES.min, X_COORDINATES.max, 5),
-    y: getRandomLocation(Y_COORDINATES.min, Y_COORDINATES.max, 5) }
+    y: getRandomLocation(Y_COORDINATES.min, Y_COORDINATES.max, 5),
+  }
 };
 
 // Offer
@@ -71,6 +72,6 @@ const generateApplication = () => {
     offer: generateOffer(coordinates),
     location: coordinates,
   }
-}
+};
 
 new Array(NUMBER_OF_APPLICATIONS).fill(null).map(() => generateApplication());
