@@ -67,5 +67,4 @@ const generateApplication = () => {
   }
 }
 
-const generateMockOffers = new Array(NUMBER_OF_REQUESTS).fill(null).map(() => generateApplication());
-console.log(generateMockOffers);
+new Array(NUMBER_OF_REQUESTS).fill(null).map(() => generateApplication());
