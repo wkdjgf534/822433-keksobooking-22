@@ -11,7 +11,7 @@ const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'condit
 const PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
+  'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
 const isValid = (min, max) => min < max && min >= 0 && max > 0
@@ -53,7 +53,7 @@ const generateOffer = (location) => {
     checkout: getRandomArrayElement(CHECKOUTS),
     features: getRandomArrayElements(FEATURES, getRandomInteger(1, 6)),
     description: getRandomArrayElement(DESCRIPTIONS, getRandomInteger(1, 6)),
-    photos: getRandomArrayElement(PHOTOS)
+    photos: getRandomArrayElement(PHOTOS),
   }
 };
 
@@ -63,8 +63,9 @@ const generateApplication = () => {
   return {
     author: generateAuthor(),
     offer: generateOffer(coordinates),
-    location: coordinates
+    location: coordinates,
   }
 }
 
 const generateMockOffers = new Array(NUMBER_OF_REQUESTS).fill(null).map(() => generateApplication());
+console.log(generateMockOffers);
