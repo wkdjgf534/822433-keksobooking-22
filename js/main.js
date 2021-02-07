@@ -1,6 +1,8 @@
 'use strict';
 
-const NUMBER_OF_REQUESTS = 10;
+const NUMBER_OF_APPLICATIONS = 10;
+const X_COORDINATES = { min: 35.65, max: 35.7 };
+const Y_COORDINATES = { min: 139.7, max: 139.8 };
 
 const TYPES = ['palace', 'flat', 'house', 'bungalow'];
 const CHECKINS = ['12:00', '13:00', '14:00'];
@@ -38,7 +40,11 @@ const getRandomArrayElements = (array, amount) => array.sort(() => Math.random()
 const generateAuthor = () => ({ avatar: `img/avatars/user0${getRandomInteger(1, 8)}.png` });
 
 // Location
-const generateLocation = () => ({ x: getRandomLocation(35.65, 35.7, 5), y: getRandomLocation(139.7, 139.8, 5) });
+const generateLocation = () => {
+  return {
+    x: getRandomLocation(X_COORDINATES.min, X_COORDINATES.max, 5),
+    y: getRandomLocation(Y_COORDINATES.min, Y_COORDINATES.max, 5) }
+};
 
 // Offer
 const generateOffer = (location) => {
@@ -67,4 +73,4 @@ const generateApplication = () => {
   }
 }
 
-new Array(NUMBER_OF_REQUESTS).fill(null).map(() => generateApplication());
+new Array(NUMBER_OF_APPLICATIONS).fill(null).map(() => generateApplication());
