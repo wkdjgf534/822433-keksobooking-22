@@ -1,4 +1,4 @@
-import './util.js';
-import {applications} from './data.js';
+// Main
 
+import {applications} from './mock-data.js';
 applications;

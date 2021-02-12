@@ -1,3 +1,5 @@
+// Random
+
 const isValid = (min, max) => min < max && min >= 0 && max > 0
 
 const getRandomInteger = (min, max) =>

@@ -1,4 +1,6 @@
-import {getRandomInteger, getRandomLocation, getRandomArrayElement, getRandomArrayElements} from './util.js'
+// Mock Data
+
+import {getRandomInteger, getRandomLocation, getRandomArrayElement, getRandomArrayElements} from './random.js'
 
 const NUMBER_OF_APPLICATIONS = 10;
 const X_COORDINATES = { min: 35.65, max: 35.7 };
