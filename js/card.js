@@ -1,6 +1,6 @@
 // Card
 import {offers} from './mock-data.js'
-import {makeElement, makeImage} from './utils.js'
+import {makeElement} from './utils.js'
 
 const THUMBNAIL_WIDTH = 45;
 const THUMBNAIL_HEIGHT = 40;
@@ -35,7 +35,9 @@ const generatePhotoThumbnails = (card, offer) => {
   if (offer.photos) {
     offer.photos.forEach(path => {
       const photoClasses = ['popup__photo'];
-      const photo = makeImage(photoClasses, path, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
+      const photo = makeElement(photoClasses, 'img', path);
+      photo.width = THUMBNAIL_WIDTH,
+      photo.height = THUMBNAIL_HEIGHT,
       photos.appendChild(photo);
     });
   }
