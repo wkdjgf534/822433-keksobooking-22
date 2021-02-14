@@ -45,8 +45,8 @@ const generatePhotoThumbnails = (card, offer) => {
 
 const generateScheduleTime = (card, offer) => {
   const text = `Заезд после ${offer.checkin} выезд до ${offer.checkout}`;
-  const shcheduleTimeOffer = card.querySelector('.popup__text--time');
-  (offer.checkin && offer.checkout) ? shcheduleTimeOffer.textContent = text : shcheduleTimeOffer.remove();
+  const scheduleTimeOffer = card.querySelector('.popup__text--time');
+  (offer.checkin && offer.checkout) ? scheduleTimeOffer.textContent = text : scheduleTimeOffer.remove();
 };
 
 const generateAvatar = (card, author) => {
