@@ -14,7 +14,7 @@ const  appartmentTypes = {
   'palace': 'Дворец',
 };
 
-const generateFeaturesPictograms = (card, offer) => {
+const generateFeaturePictograms = (card, offer) => {
   const features = card.querySelector('.popup__features');
   features.innerHTML = '';
 
@@ -51,7 +51,7 @@ const createCard = (data) => {
   card.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin} выезд до ${offer.checkout}`;
   card.querySelector('.popup__description').textContent = offer.description;
   card.querySelector('.popup__avatar').src = author.avatar;
-  generateFeaturesPictograms(card, offer);
+  generateFeaturePictograms(card, offer);
   generatePhotoThumbnails(card, offer);
   return card;
 };
