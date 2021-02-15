@@ -2,6 +2,6 @@
 import {cardFragment} from './card.js'
 
 const mapCanvas = document.querySelector('#map-canvas');
-mapCanvas.appendChild(cardFragment.firstChild);
+mapCanvas.appendChild(cardFragment.firstElementChild);
 
 export {mapCanvas};

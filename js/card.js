@@ -30,7 +30,7 @@ const generateFeaturePictograms = (card, offer) => {
 
 const generatePhotoThumbnails = (card, offer) => {
   const photos = card.querySelector('.popup__photos');
-  const blankPhoto = photos.querySelector('.popup__photo');
+  const blankPhoto = photos.querySelector('.popup__photo:first-child');
   photos.removeChild(blankPhoto);
 
   if (offer.photos) {
@@ -67,18 +67,16 @@ const generateCardElement = (card, element, action, className) => {
   element ? offerElement[action] = element : offerElement.remove();
 }
 
-//const cards = [];
-
 const createCard = (data) => {
   const offer = data.offer;
   const card = cardTemplate.cloneNode(true);
   const author = data.author;
 
-  generateCardElement(card, offer.title, 'textContent', '.popup__title' );                                //title
-  generateCardElement(card, offer.address, 'textContent', '.popup__text--address' );                      //address
-  generateCardElement(card, offer.description, 'textContent', '.popup__description' );                    //description
-  generateCardElement(card, author.avatar, 'src', '.popup__avatar' );                                     //avatar
-  generateCardElement(card, appartmentTypes[offer.type], 'textContent', '.popup__type' );                 //type
+  generateCardElement(card, offer.title, 'textContent', '.popup__title' );
+  generateCardElement(card, offer.address, 'textContent', '.popup__text--address' );
+  generateCardElement(card, offer.description, 'textContent', '.popup__description' );
+  generateCardElement(card, author.avatar, 'src', '.popup__avatar' );
+  generateCardElement(card, appartmentTypes[offer.type], 'textContent', '.popup__type' );
 
   generatePrice(card, offer);
   generateCapacity(card, offer);
