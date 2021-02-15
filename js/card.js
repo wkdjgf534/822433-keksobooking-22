@@ -6,6 +6,7 @@ const THUMBNAIL_WIDTH = 45;
 const THUMBNAIL_HEIGHT = 40;
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
+const cardFragment = document.createDocumentFragment();
 
 const  appartmentTypes = {
   'flat':  'Квартира',
@@ -49,11 +50,6 @@ const generateScheduleTime = (card, offer) => {
   (offer.checkin && offer.checkout) ? scheduleTimeOffer.textContent = text : scheduleTimeOffer.remove();
 };
 
-const generateAvatar = (card, author) => {
-  const userAvatar = card.querySelector('.popup__avatar');
-  author.avatar ? userAvatar.src = author.avatar : userAvatar.remove();
-};
-
 const generateCapacity = (card, offer) => {
   const text = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   const capacityOffer = card.querySelector('.popup__text--capacity');
@@ -66,47 +62,32 @@ const generatePrice = (card, offer) => {
   offer.price ? priceOffer.textContent = text : priceOffer.remove();
 };
 
-const generateDescription = (card, offer) => {
-  const descriptionOffer = card.querySelector('.popup__description');
-  offer.description ? descriptionOffer.textContent = offer.description : descriptionOffer.remove();
-};
-
-const generateAppartmentType = (card, offer) => {
-  const appartmentTypeOffer = card.querySelector('.popup__type')
-  offer.type ? appartmentTypeOffer.textContent = appartmentTypes[offer.type] : appartmentTypeOffer.remove();
-};
-
-const generateAddress = (card, offer) => {
-  const addressOffer = card.querySelector('.popup__text--address')
-  offer.address ? addressOffer.textContent = offer.address : addressOffer.remove();
-};
-
-const generateTitle = (card, offer) => {
-  const titleOffer = card.querySelector('.popup__title')
-  offer.title ? titleOffer.textContent = offer.title : titleOffer.remove();
+const generateCardElement = (card, element, action, className) => {
+  const offerElement = card.querySelector(className)
+  element ? offerElement[action] = element : offerElement.remove();
 }
 
-const cards = [];
+//const cards = [];
 
 const createCard = (data) => {
   const offer = data.offer;
   const card = cardTemplate.cloneNode(true);
   const author = data.author;
 
-  generateTitle(card, offer);
-  generateAddress(card, offer);
-  generateAppartmentType(card, offer);
+  generateCardElement(card, offer.title, 'textContent', '.popup__title' );                                //title
+  generateCardElement(card, offer.address, 'textContent', '.popup__text--address' );                      //address
+  generateCardElement(card, offer.description, 'textContent', '.popup__description' );                    //description
+  generateCardElement(card, author.avatar, 'src', '.popup__avatar' );                                     //avatar
+  generateCardElement(card, appartmentTypes[offer.type], 'textContent', '.popup__type' );                 //type
+
   generatePrice(card, offer);
   generateCapacity(card, offer);
   generateScheduleTime(card, offer);
   generateFeaturePictograms(card, offer);
   generatePhotoThumbnails(card, offer);
-  generateAvatar(card, author);
-  generateDescription(card, offer);
 
-  return card;
+  cardFragment.appendChild(card);
 };
 
-offers.forEach(offer => cards.push(createCard(offer)));
-
-export {cards};
+offers.forEach(offer => createCard(offer));
+export {cardFragment};
