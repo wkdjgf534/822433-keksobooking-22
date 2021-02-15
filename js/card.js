@@ -44,27 +44,13 @@ const generatePhotoThumbnails = (card, offer) => {
   }
 }
 
-const generateScheduleTime = (card, offer) => {
-  const text = `Заезд после ${offer.checkin} выезд до ${offer.checkout}`;
-  const scheduleTimeOffer = card.querySelector('.popup__text--time');
-  (offer.checkin && offer.checkout) ? scheduleTimeOffer.textContent = text : scheduleTimeOffer.remove();
-};
-
-const generateCapacity = (card, offer) => {
-  const text = `${offer.rooms} комнаты для ${offer.guests} гостей`;
-  const capacityOffer = card.querySelector('.popup__text--capacity');
-  (offer.rooms && offer.guests) ? capacityOffer.textContent = text : capacityOffer.remove();
-};
-
-const generatePrice = (card, offer) => {
-  const text = `${offer.price} ₽/ночь`;
-  const priceOffer = card.querySelector('.popup__text--price');
-  offer.price ? priceOffer.textContent = text : priceOffer.remove();
-};
-
-const generateCardElement = (card, element, action, className) => {
+const generateCardElement = (card, elements, className, message = '', action = 'textContent') => {
+  const text = message.length > 1 ? `${message}` : elements[0]
   const offerElement = card.querySelector(className)
-  element ? offerElement[action] = element : offerElement.remove();
+  if (elements.length > 1) {
+    (elements[0] && elements[1]) ? offerElement[action] = text : offerElement.remove();
+  }
+  elements[0] ? offerElement[action] = text : offerElement.remove();
 }
 
 const createCard = (data) => {
@@ -72,15 +58,15 @@ const createCard = (data) => {
   const card = cardTemplate.cloneNode(true);
   const author = data.author;
 
-  generateCardElement(card, offer.title, 'textContent', '.popup__title' );
-  generateCardElement(card, offer.address, 'textContent', '.popup__text--address' );
-  generateCardElement(card, offer.description, 'textContent', '.popup__description' );
-  generateCardElement(card, author.avatar, 'src', '.popup__avatar' );
-  generateCardElement(card, appartmentTypes[offer.type], 'textContent', '.popup__type' );
+  generateCardElement(card, [offer.title], '.popup__title');
+  generateCardElement(card, [offer.address],  '.popup__text--address');
+  generateCardElement(card, [offer.description], '.popup__description');
+  generateCardElement(card, [author.avatar], '.popup__avatar', 'src');
+  generateCardElement(card, [appartmentTypes[offer.type]],'.popup__type');
+  generateCardElement(card, [offer.price], '.popup__text--price', `${offer.price} ₽/ночь`);
+  generateCardElement(card, [offer.rooms, offer.guests], '.popup__text--capacity', `${offer.rooms} комнаты для ${offer.guests} гостей`)
+  generateCardElement(card, [offer.checkin, offer.checkout], '.popup__text--time', `Заезд после ${offer.checkin} выезд до ${offer.checkout}`);
 
-  generatePrice(card, offer);
-  generateCapacity(card, offer);
-  generateScheduleTime(card, offer);
   generateFeaturePictograms(card, offer);
   generatePhotoThumbnails(card, offer);
 
