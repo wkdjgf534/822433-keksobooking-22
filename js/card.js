@@ -16,9 +16,9 @@ const  appartmentTypes = {
 
 const generateFeaturePictograms = (card, offer) => {
   const features = card.querySelector('.popup__features');
+  features.innerHTML = '';
 
   if (offer.features) {
-    features.innerHTML = '';
     offer.features.forEach(element => {
       const featureClasses = ['popup__feature', `popup__feature--${element}`]
       const feature = makeElement(featureClasses, 'li');
@@ -64,6 +64,26 @@ const generatePrice = (card, offer) => {
   const text = `${offer.price} ₽/ночь`;
   const priceOffer = card.querySelector('.popup__text--price');
   offer.price ? priceOffer.textContent = text : priceOffer.remove();
+};
+
+const generateDescription = (card, offer) => {
+  const descriptionOffer = card.querySelector('.popup__description');
+  offer.description ? descriptionOffer.textContent = offer.description : descriptionOffer.remove();
+};
+
+const generateAppartmentType = (card, offer) => {
+  const appartmentTypeOffer = card.querySelector('.popup__type')
+  offer.type ? appartmentTypeOffer.textContent = appartmentTypes[offer.type] : appartmentTypeOffer.remove();
+};
+
+const generateAddress = (card, offer) => {
+  const addressOffer = card.querySelector('.popup__text--address')
+  offer.address ? addressOffer.textContent = offer.address : addressOffer.remove();
+};
+
+const generateTitle = (card, offer) => {
+  const titleOffer = card.querySelector('.popup__title')
+  offer.title ? titleOffer.textContent = offer.title : titleOffer.remove();
 }
 
 const cards = [];
@@ -72,16 +92,17 @@ const createCard = (data) => {
   const offer = data.offer;
   const card = cardTemplate.cloneNode(true);
   const author = data.author;
-  card.querySelector('.popup__title').textContent = offer.title;
-  card.querySelector('.popup__text--address').textContent = offer.address;
-  card.querySelector('.popup__type').textContent = appartmentTypes[offer.type];
-  card.querySelector('.popup__description').textContent = offer.description;
+
+  generateTitle(card, offer);
+  generateAddress(card, offer);
+  generateAppartmentType(card, offer);
   generatePrice(card, offer);
   generateCapacity(card, offer);
   generateScheduleTime(card, offer);
   generateFeaturePictograms(card, offer);
   generatePhotoThumbnails(card, offer);
   generateAvatar(card, author);
+  generateDescription(card, offer);
 
   return card;
 };
