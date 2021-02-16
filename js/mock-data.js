@@ -42,7 +42,7 @@ const generateOffer = (location) => {
     checkout: getRandomArrayElement(CHECKOUTS),
     features: getRandomArrayElements(FEATURES, getRandomInteger(1, 6)),
     description: getRandomArrayElement(DESCRIPTIONS, getRandomInteger(1, 6)),
-    photos: getRandomArrayElement(PHOTOS),
+    photos: getRandomArrayElements(PHOTOS, getRandomInteger(1, 3)),
   }
 };
 
@@ -56,6 +56,6 @@ const generateApplication = () => {
   }
 };
 
-const applications = new Array(NUMBER_OF_APPLICATIONS).fill(null).map(generateApplication);
+const offers = new Array(NUMBER_OF_APPLICATIONS).fill(null).map(generateApplication);
 
-export {applications}
+export {offers}

@@ -1,4 +1,5 @@
 // Main
 
-import {applications} from './mock-data.js';
-applications;
+import {mapCanvas} from './map.js';
+
+mapCanvas;
