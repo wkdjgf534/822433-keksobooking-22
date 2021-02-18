@@ -1,5 +1,6 @@
 // Main
 
-import {mapCanvas} from './map.js';
+import './form.js'
+import {mapCanvas} from './map.js'
 
-mapCanvas;
+mapCanvas

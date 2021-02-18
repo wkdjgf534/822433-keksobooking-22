@@ -1,14 +1,5 @@
 // Utils
 
-const makeElement = (className, tagName, source) => {
-  const element = document.createElement(tagName);
-  element.classList.add(...className);
+const findOne = (selector, el = document) => el.querySelector(selector)
 
-  if (source) {
-    element.src = source;
-  }
-
-  return element;
-}
-
-export {makeElement}
+export {findOne}
