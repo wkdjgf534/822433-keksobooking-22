@@ -1,3 +1,5 @@
+// Filter
+
 import {findOne, findAll} from './utils.js'
 
 const filter = document.querySelector('.map__filters')

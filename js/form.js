@@ -1,4 +1,5 @@
 // Form
+
 import {findOne, findAll} from './utils.js'
 
 const typesToPrices = {
@@ -9,6 +10,7 @@ const typesToPrices = {
 }
 
 const form = document.querySelector('.ad-form')
+const coordinates = form.querySelector('#address')
 
 const formFieldsets = findAll('fieldset', form)
 const typeElement = findOne('#type', form)
@@ -26,13 +28,13 @@ typeElement.addEventListener('change', () => {
   priceElement.min = typesToPrices[typeElement.value]
 })
 
-const setForm = (className, action, value) => {
+const setFormActivity = (className, action, value = true) => {
   form.classList[action](className);
   formFieldsets.forEach((fieldset) => fieldset.disabled = value )
-};
+}
 
 checkInElement.addEventListener('change', setCheckingTime)
 checkOutElement.addEventListener('change', setCheckingTime)
-setForm('ad-form--disabled', 'add', true)
+setFormActivity('ad-form--disabled', 'add')
 
-export {setForm}
+export {setFormActivity, coordinates}

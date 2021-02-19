@@ -1,6 +1,5 @@
 // Main
 
 import './form.js'
-import {mapCanvas} from './map.js'
-
-mapCanvas
+import './map.js'
+import './filter.js'
