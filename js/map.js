@@ -1,4 +1,5 @@
 // Map
+/* global L:readonly */
 
 import {setFilter} from './filter.js'
 import {setFormActivity, coordinates} from './form.js'
