@@ -4,18 +4,12 @@ const filter = document.querySelector('.map__filters')
 const filterInputFields = findAll('select', filter)
 const features = findOne('#housing-features', filter)
 
-const disableFilter = () => {
-  filter.classList.add('map__filters--disabled')
-  filterInputFields.forEach((select) => select.disabled = true )
-  features.disabled = true
+const setFilter = (className, action, value = true) => {
+  filter.classList[action](className)
+  filterInputFields.forEach((select) => select.disabled = value )
+  features.disabled = value
 }
 
-const enableFilter = () => {
-  filter.classList.remove('map__filters--disabled')
-  filterInputFields.forEach((select) => select.disabled = false )
-  features.disabled = false
-}
+setFilter('map__filters--disabled', 'add')
 
-disableFilter()
-
-export {enableFilter}
+export {setFilter}

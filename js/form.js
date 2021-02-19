@@ -26,18 +26,13 @@ typeElement.addEventListener('change', () => {
   priceElement.min = typesToPrices[typeElement.value]
 })
 
-const disableForm = () => {
-  form.classList.add('ad-form--disabled');
-  formFieldsets.forEach((fieldset) => fieldset.disabled = true )
-};
-
-const enableForm = () => {
-  form.classList.remove('ad-form--disabled');
-  formFieldsets.forEach((fieldset) => fieldset.disabled = false )
+const setForm = (className, action, value) => {
+  form.classList[action](className);
+  formFieldsets.forEach((fieldset) => fieldset.disabled = value )
 };
 
 checkInElement.addEventListener('change', setCheckingTime)
 checkOutElement.addEventListener('change', setCheckingTime)
-disableForm()
+setForm('ad-form--disabled', 'add', true)
 
-export {enableForm}
+export {setForm}
