@@ -9,8 +9,8 @@ const typesToPrices = {
   palace: 10000,
 }
 
-const form = document.querySelector('.ad-form')
-const coordinates = form.querySelector('#address')
+const form = findOne('.ad-form', document)
+const coordinates = findOne('#address', form)
 
 const formFieldsets = findAll('fieldset', form)
 const typeElement = findOne('#type', form)
@@ -35,6 +35,5 @@ const setFormActivity = (className, action, value = true) => {
 
 checkInElement.addEventListener('change', setCheckingTime)
 checkOutElement.addEventListener('change', setCheckingTime)
-setFormActivity('ad-form--disabled', 'add')
 
 export {setFormActivity, coordinates}
