@@ -1,17 +1,6 @@
 // Form
 
-//const MIN_TITLE_LENGTH = 30;
-//const MAX_TITLE_LENGTH = 100;
-
-//const MIN_PRICE = 0;
-//const MAX_PRICE = 1000000;
-
-//const GUEST_ROOMS = {
-//  1: ['1'],
-//  2: ['2', '1'],
-//  3: ['3', '2', '1'],
-//  100: ['0'],
-//};
+import {findOne, findAll} from './utils.js'
 
 const typesToPrices = {
   flat: 1000,
@@ -20,11 +9,14 @@ const typesToPrices = {
   palace: 10000,
 }
 
-const formElement = document.querySelector('.ad-form')
-const typeElement = formElement.querySelector('#type')
-const priceElement = formElement.querySelector('#price')
-const checkInElement = formElement.querySelector('#timein')
-const checkOutElement = formElement.querySelector('#timeout')
+const form = findOne('.ad-form', document)
+const coordinates = findOne('#address', form)
+
+const formFieldsets = findAll('fieldset', form)
+const typeElement = findOne('#type', form)
+const priceElement = findOne('#price', form)
+const checkInElement = findOne('#timein', form)
+const checkOutElement = findOne('#timeout', form)
 
 const setCheckingTime = (evt) => {
   checkInElement.value = evt.target.value;
@@ -36,5 +28,12 @@ typeElement.addEventListener('change', () => {
   priceElement.min = typesToPrices[typeElement.value]
 })
 
-checkInElement.addEventListener('change', setCheckingTime);
-checkOutElement.addEventListener('change', setCheckingTime);
+const setFormActivity = (className, action, value = true) => {
+  form.classList[action](className);
+  formFieldsets.forEach((fieldset) => fieldset.disabled = value )
+}
+
+checkInElement.addEventListener('change', setCheckingTime)
+checkOutElement.addEventListener('change', setCheckingTime)
+
+export {setFormActivity, coordinates}

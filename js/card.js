@@ -1,9 +1,8 @@
 // Card
-import {cards} from './mock-data.js'
+
 import {findOne} from './utils.js'
 
 const cardTemplate = findOne('.popup', findOne('#card').content)
-const cardFragment = new DocumentFragment()
 let card
 
 const createCardEl = (offer, className, msg = '') => {
@@ -77,8 +76,7 @@ const createCard = (item) => {
   createCardEl(features, '.popup__features')
   createCardEl(photos, '.popup__photos')
 
-  cardFragment.append(card)
+  return card
 }
 
-createCard(cards[0])
-export {cardFragment}
+export {createCard}
