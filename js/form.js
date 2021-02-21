@@ -9,7 +9,7 @@ const typesToPrices = {
   palace: 10000,
 }
 
-const form = findOne('.ad-form', document)
+const form = findOne('.ad-form')
 const coordinates = findOne('#address', form)
 
 const formFieldsets = findAll('fieldset', form)
