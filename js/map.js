@@ -4,8 +4,10 @@
 import {setFilter} from './filter.js'
 import {setFormActivity, coordinates} from './form.js'
 import {createCard} from './card.js'
+import {setReadOnly} from './utils.js'
 
 const INITIAL_COORDINATES = { lat: 35.65283, lng: 139.83947 }
+const ZOOM = 10
 
 const MAIN_PIN_ICON = L.icon({
   iconUrl: './img/main-pin.svg',
@@ -40,12 +42,13 @@ const initMap = (cards) => {
     .on('load', () => {
       setFilter('map__filters--disabled', 'remove', false)
       setFormActivity('ad-form--disabled', 'remove', false)
+      setReadOnly(coordinates)
       coordinates.value = `${INITIAL_COORDINATES.lat}, ${INITIAL_COORDINATES.lng}`
     })
     .setView({
       lat: INITIAL_COORDINATES.lat,
       lng: INITIAL_COORDINATES.lng,
-    }, 10)
+    }, ZOOM)
 
   sourceMap.addTo(map)
 

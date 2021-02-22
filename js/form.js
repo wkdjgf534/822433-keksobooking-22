@@ -29,7 +29,6 @@ const roomAmountElement = findOne('#room_number', form)
 const guestAmountElement = findOne('#capacity', form)
 const capacityOptions = findAll('option', guestAmountElement)
 
-
 const setFormActivity = (className, action, value = true) => {
   form.classList[action](className);
   formFieldsets.forEach((fieldset) => fieldset.disabled = value )
