@@ -1,7 +1,7 @@
 // Form
 
 import {findOne, findAll} from './utils.js'
-import {titleValidation, priceValidation} from './validation.js'
+import {validateTitle, validatePrice} from './validation.js'
 
 const TYPES_TO_PRICES = {
   flat: 1000,
@@ -43,7 +43,6 @@ const syncGuestOption = () => {
   guestAmountElement.value = roomAmountElement.value === '100' ? '0' : roomAmountElement.value
 };
 
-
 typeElement.addEventListener('change', () => {
   priceElement.placeholder = TYPES_TO_PRICES[typeElement.value]
   priceElement.min = TYPES_TO_PRICES[typeElement.value]
@@ -56,8 +55,15 @@ const setCheckingTime = (evt) => {
 
 checkInElement.addEventListener('change', setCheckingTime)
 checkOutElement.addEventListener('change', setCheckingTime)
-titleElement.addEventListener('input', () => titleValidation(titleElement))
-priceElement.addEventListener('input', () => priceValidation(priceElement, typeElement, TYPES_TO_PRICES))
+titleElement.addEventListener('input', () => validateTitle(titleElement))
+priceElement.addEventListener('input', () => validatePrice(priceElement, typeElement, TYPES_TO_PRICES))
 roomAmountElement.addEventListener('change', () => syncGuestOption())
+form.addEventListener('submit', (evt) => {
+  if (!GUESTS_BY_ROOM[roomAmountElement.value].includes(guestAmountElement.value)) {
+    evt.preventDefault()
+    guestAmountElement.setCustomValidity('Количество комнат не соответствует количеству гостей')
+    guestAmountElement.reportValidity()
+  }
+})
 
 export {setFormActivity, syncGuestOption, coordinates}

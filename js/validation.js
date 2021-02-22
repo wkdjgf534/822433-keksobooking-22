@@ -3,7 +3,7 @@
 const TITLE_LENGTH = { minValue: 30, maxValue: 100 }
 const MAX_PRICE = 1000000
 
-const titleValidation = (title) => {
+const validateTitle = (title) => {
   const valueLength = title.value.length
   const messages = {
     min_error: `Ещё ${TITLE_LENGTH.minValue - valueLength} символов`,
@@ -13,7 +13,7 @@ const titleValidation = (title) => {
   setErrorMessage(title, valueLength, TITLE_LENGTH,  messages)
 }
 
-const priceValidation = (price, type, TYPES_TO_PRICES) => {
+const validatePrice = (price, type, TYPES_TO_PRICES) => {
   const value = price.value
   const typeOption = type.options[type.selectedIndex]
 
@@ -41,4 +41,4 @@ const setErrorMessage = (object, value, range,  messages) => {
   object.reportValidity()
 }
 
-export {titleValidation, priceValidation}
+export {validateTitle, validatePrice}
