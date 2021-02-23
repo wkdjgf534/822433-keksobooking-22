@@ -1,7 +1,7 @@
 // Form
 
 import {findOne, findAll} from './utils.js'
-import {validateTitle, validatePrice} from './validation.js'
+import {validateInputField} from './validation.js'
 
 const TYPES_TO_PRICES = {
   flat: 1000,
@@ -55,9 +55,26 @@ const setCheckingTime = (evt) => {
 
 checkInElement.addEventListener('change', setCheckingTime)
 checkOutElement.addEventListener('change', setCheckingTime)
-titleElement.addEventListener('input', () => validateTitle(titleElement))
-priceElement.addEventListener('input', () => validatePrice(priceElement, typeElement, TYPES_TO_PRICES))
 roomAmountElement.addEventListener('change', () => syncGuestOption())
+
+titleElement.addEventListener('input', () => {
+  const errorMessages =
+  {
+    min_error: `Ещё ${titleElement.minLength - titleElement.value.length} символов`,
+    max_error: `Удалите лишние ${titleElement.value.length - titleElement.maxLength} символов`,
+  }
+  validateInputField(titleElement , errorMessages)
+})
+
+priceElement.addEventListener('input', () => {
+  const typeOption = typeElement.options[typeElement.selectedIndex]
+  const errorMessages = {
+    min_error: `Минимальная цена за ${typeOption.textContent} - ${TYPES_TO_PRICES[typeOption.value]}`,
+    max_error: `Цена превышает ${priceElement.max}`,
+  }
+  validateInputField(priceElement, errorMessages)
+})
+
 form.addEventListener('submit', (evt) => {
   if (!GUESTS_BY_ROOM[roomAmountElement.value].includes(guestAmountElement.value)) {
     evt.preventDefault()
