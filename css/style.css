@@ -1028,3 +1028,19 @@ fieldset {
 .hidden {
   display: none;
 }
+
+.backend-error {
+  top: 0;
+  width: 100%;
+  height: 65px;
+  position: fixed;
+  border: 1px solid  #ff5635;
+  background-color: #ff5635;
+  text-align: center;
+  z-index: 1000;
+}
+
+.backend-error > p {
+  font-size: 20px;
+  color: #fff;
+}
