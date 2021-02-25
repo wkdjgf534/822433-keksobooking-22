@@ -1,4 +1,4 @@
-// XMLHttpRequest
+// Requests to server
 
 const getData = (url, onSuccess, onError) => {
   fetch(url)
@@ -7,4 +7,21 @@ const getData = (url, onSuccess, onError) => {
     .catch(() => onError())
 }
 
-export {getData}
+const sendData = (url, data, onSuccess, onError) => {
+  fetch(url,
+    {
+      method: 'POST',
+      body: data,
+    },
+  )
+    .then((response) => {
+      if (response.ok) {
+        onSuccess()
+      } else {
+        throw new Error()
+      }
+    })
+    .catch(() => onError())
+}
+
+export {getData, sendData}

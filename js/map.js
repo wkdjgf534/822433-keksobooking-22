@@ -37,10 +37,8 @@ const sourceMap = L.tileLayer(
   { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' },
 )
 
-let map = {}
-console.log(map)
 const initEmptyMap = () => {
-  map = L.map('map-canvas')
+  const map = L.map('map-canvas')
     .on('load', () => {
       setFilter('map__filters--disabled', 'remove', false)
       setFormActivity('ad-form--disabled', 'remove', false)
@@ -57,27 +55,11 @@ const initEmptyMap = () => {
   mainPin.addTo(map).on('moveend', (evt) => {
     coordinates.value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`
   })
+  return map
 }
 
 const appendCardsToMap = (cards) => {
-  initEmptyMap()
-  //const map = L.map('map-canvas')
-  //  .on('load', () => {
-  //    setFilter('map__filters--disabled', 'remove', false)
-  //    setFormActivity('ad-form--disabled', 'remove', false)
-  //    setReadOnly(coordinates)
-  //    coordinates.value = `${INITIAL_COORDINATES.lat}, ${INITIAL_COORDINATES.lng}`
-  //  })
-  //  .setView({
-  //    lat: INITIAL_COORDINATES.lat,
-  //    lng: INITIAL_COORDINATES.lng,
-  //  }, ZOOM)
-
-  //sourceMap.addTo(map)
-
-  //mainPin.addTo(map).on('moveend', (evt) => {
-  //  coordinates.value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`
-  //})
+  const map = initEmptyMap()
 
   cards.forEach((card) => {
     const smallPin = L.marker(

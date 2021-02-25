@@ -1,6 +1,6 @@
 // Main
 
-const SERVER_URL = 'https://22.javascript.pages.academy/keksobooking/dat';
+const SERVER_URL = 'https://22.javascript.pages.academy/keksobooking/data';
 
 import './validation.js'
 import {setFormActivity, syncGuestOption} from'./form.js'
@@ -9,15 +9,17 @@ import {getData} from './backend.js'
 import {appendCardsToMap, initEmptyMap} from './map.js'
 import {showNotification} from './utils.js'
 
-
-setFilter('map__filters--disabled', 'add')  // отключаем фильтры
-setFormActivity('ad-form--disabled', 'add') // отключаем элементы формы
-syncGuestOption()                           // динамическое обновление доступных гостей в зависимости от комнат
-
-const successHandler = (data) =>  appendCardsToMap(data)
-const errorHandler = ()=> {
-  initEmptyMap()
-  showNotification('Ошибка')
+const onSuccessHandler = (data) =>  {
+  appendCardsToMap(data)
+  showNotification('success', 'Данные обновлены')
 }
 
-getData(SERVER_URL, successHandler, errorHandler)
+const onErrorHandler = () => {
+  initEmptyMap()
+  showNotification('error', 'Произошла ошибка')
+}
+
+setFilter('map__filters--disabled', 'add')            // отключаем фильтры
+setFormActivity('ad-form--disabled', 'add')           // отключаем элементы формы
+getData(SERVER_URL, onSuccessHandler, onErrorHandler) //получаем данные или инициализация карты с маркером
+syncGuestOption()                                     // динамическое обновление доступных гостей в зависимости от комнат

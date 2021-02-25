@@ -9,12 +9,13 @@ const findAll = (selector, el = document) => [...el.querySelectorAll(selector)]
 
 const setReadOnly = (el) =>  el.readOnly = true
 
-const showNotification = (message) => {
-  const backEndErrorTemplate = findOne('#backend-error').content.querySelector('.backend-error');
+const showNotification = (type, message) => {
+  const backEndErrorTemplate = findOne('#notification').content.querySelector('.notification');
+  const promoContainer = findOne('.promo');
   const toast = backEndErrorTemplate.cloneNode(true);
-  findOne('.backend-error__message', toast).textContent = message;
-  const container = document.querySelector('.promo');
-  container.append(toast)
+  toast.classList.add(`notification__${type}`)
+  findOne('.notification__message', toast).textContent = message;
+  promoContainer.append(toast)
 }
 
 export {findOne, findAll, setReadOnly, showNotification}
