@@ -1,13 +1,13 @@
 // Utils
 
-const INTERVAL = 5000
+const SHOW_INTERVAL = 5000
 
 const findOne = (selector, el = document) => el.querySelector(selector)
 
 // querySelectorAll возвращает NodeList, оператор spread преобразует его в массив
 const findAll = (selector, el = document) => [...el.querySelectorAll(selector)]
 
-const setReadOnly = (el) =>  el.readOnly = true
+const setReadOnly = (el) => el.readOnly = true
 
 const mainContainer = findOne('main')
 const promoContainer = findOne('.promo')
@@ -22,7 +22,7 @@ const showMessage = (object, type, message) => {
     promoContainer.append(element)
     setTimeout(() => {
       element.remove()
-    }, INTERVAL)
+    }, SHOW_INTERVAL)
   } else {
     element.addEventListener('click', () => element.remove())
     window.addEventListener('keydown', (evt) => evt.key === 'Escape' ? element.remove() : null)
