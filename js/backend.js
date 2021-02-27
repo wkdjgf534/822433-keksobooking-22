@@ -1,7 +1,6 @@
 // Requests to server
-const SET_SERVER_URL = 'https://22.javascript.pages.academy/keksobooking'
-const GET_SERVER_URL = `${SET_SERVER_URL}/data`
-
+const POST_SERVER_URL = 'https://22.javascript.pages.academy/keksobooking'
+const GET_SERVER_URL = `${POST_SERVER_URL}/data`
 
 const getData = (onSuccess, onError) => {
   fetch(GET_SERVER_URL)
@@ -11,7 +10,7 @@ const getData = (onSuccess, onError) => {
 }
 
 const sendData = (onSuccess, onError, data) => {
-  fetch(SET_SERVER_URL,
+  fetch(POST_SERVER_URL,
     {
       method: 'POST',
       body: data,
@@ -19,14 +18,12 @@ const sendData = (onSuccess, onError, data) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess();
+        onSuccess()
       } else {
-        onError();
+        throw new Error()
       }
     })
-    .catch(() => {
-      onError();
-    });
+    .catch(() => onError())
 }
 
 export {getData, sendData}
