@@ -76,4 +76,4 @@ const appendCardsToMap = (cards) => {
   })
 }
 
-export {appendCardsToMap, initEmptyMap}
+export {appendCardsToMap, initEmptyMap, mainPin, INITIAL_COORDINATES}
