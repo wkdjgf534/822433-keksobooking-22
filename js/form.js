@@ -1,8 +1,7 @@
 // Form
 
-import {findOne, findAll, showPopupMessage} from './utils.js'
+import {findOne, findAll} from './utils.js'
 import {validateInputField} from './validation.js'
-import {mainPin, INITIAL_COORDINATES} from './map.js'
 import {sendData} from './backend.js'
 
 const TYPES_TO_PRICES = {
@@ -77,19 +76,11 @@ priceElement.addEventListener('input', () => {
   validateInputField(priceElement, errorMessages)
 })
 
-
-form.addEventListener('reset', () => {
-  mainPin.setLatLng(INITIAL_COORDINATES)
-  setTimeout(() => {
-    coordinates.value = `${INITIAL_COORDINATES.lat}, ${INITIAL_COORDINATES.lng}`
-  }, 500)
-})
-
 const submitForm = (onSuccess, onError) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault()
 
-    sendData(() => onSuccess(), () => onError(), new FormData(evt.target))
+    sendData(onSuccess, onError, new FormData(evt.target))
   })
 }
 

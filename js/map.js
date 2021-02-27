@@ -43,7 +43,7 @@ const initEmptyMap = () => {
       setFilter('map__filters--disabled', 'remove', false)
       setFormActivity('ad-form--disabled', 'remove', false)
       setReadOnly(coordinates)
-      coordinates.value = `${INITIAL_COORDINATES.lat}, ${INITIAL_COORDINATES.lng}`
+      setDefaultCoordinates()
     })
     .setView({
       lat: INITIAL_COORDINATES.lat,
@@ -76,4 +76,11 @@ const appendCardsToMap = (cards) => {
   })
 }
 
-export {appendCardsToMap, initEmptyMap, mainPin, INITIAL_COORDINATES}
+const setDefaultCoordinates = ()=> coordinates.value = `${INITIAL_COORDINATES.lat}, ${INITIAL_COORDINATES.lng}`
+
+const resetMainMarker = () =>{
+  mainPin.setLatLng(L.latLng(INITIAL_COORDINATES.lat, INITIAL_COORDINATES.lng))
+  setDefaultCoordinates()
+}
+
+export {appendCardsToMap, initEmptyMap, mainPin, INITIAL_COORDINATES, resetMainMarker}

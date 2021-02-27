@@ -1,30 +1,31 @@
 // Main
 
-
 import './validation.js'
-import {setFormActivity, syncGuestOption, submitForm, form} from'./form.js'
+import {setFormActivity, submitForm, form} from'./form.js'
 import {setFilter} from './filter.js'
 import {getData} from './backend.js'
-import {appendCardsToMap, initEmptyMap} from './map.js'
-import {showNotification, showPopupMessage} from './utils.js'
+import {appendCardsToMap, initEmptyMap, resetMainMarker} from './map.js'
+import {showMessage} from './utils.js'
 
-
-const onSuccessHandler = (data) =>  {
+const onSuccessRecieveData = (data) =>  {
   appendCardsToMap(data)
-  showNotification('success', 'Данные обновлены')
+  showMessage('notification', 'success', 'Данные обновлены')
 }
 
-const onErrorHandler = () => {
+const onErrorRecieveData = () => {
   initEmptyMap()
-  showNotification('error', 'Произошла ошибка')
+  showMessage('notification', 'error', 'Произошла ошибка')
 }
+
+const onSuccessSubmitData = () =>  {
+  showMessage('success')
+  form.reset()
+  resetMainMarker()
+}
+
+const onErrorSubmitData = () => showMessage('error')
 
 setFilter('map__filters--disabled', 'add')            // отключаем фильтры
 setFormActivity('ad-form--disabled', 'add')           // отключаем элементы формы
-getData(onSuccessHandler, onErrorHandler) //получаем данные или инициализация карты с маркером
-syncGuestOption()                                     // динамическое обновление доступных гостей в зависимости от комнат
-
-submitForm(() => {
-  showPopupMessage('success');
-  form.reset();
-}, () => showPopupMessage('error'));
+getData(onSuccessRecieveData, onErrorRecieveData)     // получаем данные или инициализация карты с маркером
+submitForm(onSuccessSubmitData, onErrorSubmitData)    // передача данных на сервер

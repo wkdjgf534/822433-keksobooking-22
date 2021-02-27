@@ -9,27 +9,25 @@ const findAll = (selector, el = document) => [...el.querySelectorAll(selector)]
 
 const setReadOnly = (el) =>  el.readOnly = true
 
-const main = findOne('main')
+const mainContainer = findOne('main')
+const promoContainer = findOne('.promo')
 
-const showNotification = (type, message) => {
-  const backEndErrorTemplate = findOne('#notification').content.querySelector('.notification')
-  const promoContainer = findOne('.promo')
-  const toast = backEndErrorTemplate.cloneNode(true)
-  toast.classList.add(`notification__${type}`)
-  findOne('.notification__message', toast).textContent = message
-  promoContainer.append(toast)
-
-  setTimeout(() => {
-    toast.remove();
-  }, INTERVAL);
-}
-
-const showPopupMessage = (object) => {
+const showMessage = (object, type, message) => {
   const elementTemplate = findOne(`.${object}`, findOne(`#${object}`).content)
   const element = elementTemplate.cloneNode(true)
-  main.appendChild(element);
-  element.addEventListener('click', () => element.remove());
-  window.addEventListener('keydown', (evt) => evt.key === 'Escape' ? element.remove() : null);
+
+  if (object === 'notification') {
+    element.classList.add(`notification__${type}`)
+    findOne('.notification__message', element).textContent = message
+    promoContainer.append(element)
+    setTimeout(() => {
+      element.remove()
+    }, INTERVAL)
+  } else {
+    element.addEventListener('click', () => element.remove())
+    window.addEventListener('keydown', (evt) => evt.key === 'Escape' ? element.remove() : null)
+    mainContainer.appendChild(element)
+  }
 }
 
-export {findOne, findAll, setReadOnly, showNotification, showPopupMessage }
+export {findOne, findAll, setReadOnly, showMessage }
