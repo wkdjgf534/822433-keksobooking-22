@@ -2,28 +2,49 @@
 const POST_SERVER_URL = 'https://22.javascript.pages.academy/keksobooking'
 const GET_SERVER_URL = `${POST_SERVER_URL}/data`
 
-const getData = (onSuccess, onError) => {
-  fetch(GET_SERVER_URL)
-    .then((response) => response.json())
-    .then((data) => onSuccess(data))
-    .catch(() => onError())
+const getData = async (onSuccess, onError) => {
+  let response
+  let data
+  try {
+    response = await fetch(GET_SERVER_URL)
+    data = await response.json()
+  } catch (error) {
+    return onError()
+  }
+  onSuccess(data)
 }
 
-const sendData = (onSuccess, onError, data) => {
-  fetch(POST_SERVER_URL,
-    {
-      method: 'POST',
-      body: data,
-    },
-  )
-    .then((response) => {
-      if (response.ok) {
-        onSuccess()
-      } else {
-        throw new Error()
-      }
-    })
-    .catch(() => onError())
+const sendData = async (onSuccess, onError, data) => {
+  let response
+  try {
+    response = await fetch(POST_SERVER_URL,
+      {
+        method: 'POST',
+        body: data,
+      },
+    )
+  } catch (error) {
+    return onError()
+  }
+  response.ok ? onSuccess() : onError()
 }
+
+
+//const sendData = (onSuccess, onError, data) => {
+//  fetch(POST_SERVER_URL,
+//    {
+//      method: 'POST',
+//      body: data,
+//    },
+//  )
+//    .then((response) => {
+//      if (response.ok) {
+//        onSuccess()
+//      } else {
+//        throw new Error()
+//      }
+//    })
+//    .catch(() => onError())
+//}
 
 export {getData, sendData}

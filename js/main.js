@@ -7,16 +7,16 @@ import {getData} from './backend.js'
 import {appendCardsToMap, initEmptyMap} from './map.js'
 import {showMessage} from './utils.js'
 
-const onSuccessRecieveData = (data) =>  {
+const onSuccessRecievedData = (data) =>  {
   appendCardsToMap(data)
   showMessage('notification', 'success', 'Данные обновлены')
 }
 
-const onErrorRecieveData = () => {
+const onErrorRecievedData = () => {
   initEmptyMap()
   showMessage('notification', 'error', 'Произошла ошибка')
 }
 
-setFilter('map__filters--disabled', 'add')            // отключаем фильтры
-setFormActivity('ad-form--disabled', 'add')           // отключаем элементы формы
-getData(onSuccessRecieveData, onErrorRecieveData)     // получаем данные или инициализация карты с маркером
+setFilter('map__filters--disabled', 'add')              // отключаем фильтры
+setFormActivity('ad-form--disabled', 'add')             // отключаем элементы формы
+getData(onSuccessRecievedData, onErrorRecievedData)     // получаем данные или инициализация карты с маркером
