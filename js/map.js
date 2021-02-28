@@ -2,7 +2,7 @@
 /* global L:readonly */
 
 import {setFilter} from './filter.js'
-import {setFormActivity, coordinates} from './form.js'
+import {setFormActivity, syncGuestOption, coordinates} from './form.js'
 import {createCard} from './card.js'
 import {setReadOnly} from './utils.js'
 
@@ -43,6 +43,7 @@ const initEmptyMap = () => {
       setFilter('map__filters--disabled', 'remove', false)
       setFormActivity('ad-form--disabled', 'remove', false)
       setReadOnly(coordinates)
+      syncGuestOption()
       setDefaultCoordinates()
     })
     .setView({

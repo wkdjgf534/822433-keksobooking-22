@@ -24,8 +24,8 @@ const showMessage = (object, type, message) => {
       element.remove()
     }, SHOW_INTERVAL)
   } else {
-    element.addEventListener('click', () => element.remove())
-    window.addEventListener('keydown', (evt) => evt.key === 'Escape' ? element.remove() : null)
+    element.onclick = () => { element.remove() }
+    window.onkeydown = (evt) => { evt.key === 'Escape' ? element.remove() : null }
     mainContainer.appendChild(element)
   }
 }

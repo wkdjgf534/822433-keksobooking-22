@@ -1,8 +1,9 @@
 // Form
 
-import {findOne, findAll} from './utils.js'
+import {findOne, findAll, showMessage} from './utils.js'
 import {validateInputField} from './validation.js'
 import {sendData} from './backend.js'
+import {resetMainMarker} from './map.js'
 
 const TYPES_TO_PRICES = {
   flat: 1000,
@@ -54,6 +55,15 @@ const setCheckingTime = (evt) => {
   checkOutElement.value = evt.target.value;
 }
 
+const onSuccessSubmitData = () =>  {
+  showMessage('success')
+  form.reset()
+  resetMainMarker()
+}
+
+const onErrorSubmitData = () => showMessage('error')
+
+
 checkInElement.addEventListener('change', setCheckingTime)
 checkOutElement.addEventListener('change', setCheckingTime)
 roomAmountElement.addEventListener('change', () => syncGuestOption())
@@ -76,12 +86,9 @@ priceElement.addEventListener('input', () => {
   validateInputField(priceElement, errorMessages)
 })
 
-const submitForm = (onSuccess, onError) => {
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault()
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault()
+  sendData(onSuccessSubmitData, onErrorSubmitData, new FormData(evt.target))
+})
 
-    sendData(onSuccess, onError, new FormData(evt.target))
-  })
-}
-
-export {setFormActivity, syncGuestOption, coordinates, submitForm, form}
+export {setFormActivity, syncGuestOption, coordinates}
