@@ -29,22 +29,4 @@ const sendData = async (onSuccess, onError, data) => {
   response.ok ? onSuccess() : onError()
 }
 
-
-//const sendData = (onSuccess, onError, data) => {
-//  fetch(POST_SERVER_URL,
-//    {
-//      method: 'POST',
-//      body: data,
-//    },
-//  )
-//    .then((response) => {
-//      if (response.ok) {
-//        onSuccess()
-//      } else {
-//        throw new Error()
-//      }
-//    })
-//    .catch(() => onError())
-//}
-
 export {getData, sendData}
