@@ -3,7 +3,7 @@ const MAX_CARDS = 10
 
 import './validation.js'
 import {setFormActivity} from'./form.js'
-import {setFilter, setFilterReset, setFilterChange} from './filter.js'
+import {setFilter} from './filter.js'
 import {getData} from './backend.js'
 import {appendCardsToMap, initEmptyMap} from './map.js'
 import {showMessage} from './utils.js'
