@@ -7,7 +7,7 @@ const getData = async (onSuccess, onError) => {
   try {
     if (response.ok) {
       const data = await response.json()
-      onSuccess(data)
+      return onSuccess(data)
     }
     throw new Error ()
   } catch (error) {
