@@ -1,7 +1,9 @@
 // Form
 
-import {findOne, findAll} from './utils.js'
+import {findOne, findAll, showMessage} from './utils.js'
 import {validateInputField} from './validation.js'
+import {sendData} from './backend.js'
+import {resetMainMarker} from './map.js'
 
 const TYPES_TO_PRICES = {
   flat: 1000,
@@ -53,6 +55,15 @@ const setCheckingTime = (evt) => {
   checkOutElement.value = evt.target.value;
 }
 
+const onSuccessSubmitData = () =>  {
+  showMessage('success')
+  form.reset()
+  resetMainMarker()
+}
+
+const onErrorSubmitData = () => showMessage('error')
+
+
 checkInElement.addEventListener('change', setCheckingTime)
 checkOutElement.addEventListener('change', setCheckingTime)
 roomAmountElement.addEventListener('change', () => syncGuestOption())
@@ -76,11 +87,8 @@ priceElement.addEventListener('input', () => {
 })
 
 form.addEventListener('submit', (evt) => {
-  if (!GUESTS_BY_ROOM[roomAmountElement.value].includes(guestAmountElement.value)) {
-    evt.preventDefault()
-    guestAmountElement.setCustomValidity('Количество комнат не соответствует количеству гостей')
-    guestAmountElement.reportValidity()
-  }
+  evt.preventDefault()
+  sendData(onSuccessSubmitData, onErrorSubmitData, new FormData(evt.target))
 })
 
 export {setFormActivity, syncGuestOption, coordinates}

@@ -2,7 +2,7 @@
 /* global L:readonly */
 
 import {setFilter} from './filter.js'
-import {setFormActivity, coordinates} from './form.js'
+import {setFormActivity, syncGuestOption, coordinates} from './form.js'
 import {createCard} from './card.js'
 import {setReadOnly} from './utils.js'
 
@@ -37,13 +37,14 @@ const sourceMap = L.tileLayer(
   { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' },
 )
 
-const initMap = (cards) => {
+const initEmptyMap = () => {
   const map = L.map('map-canvas')
     .on('load', () => {
       setFilter('map__filters--disabled', 'remove', false)
       setFormActivity('ad-form--disabled', 'remove', false)
       setReadOnly(coordinates)
-      coordinates.value = `${INITIAL_COORDINATES.lat}, ${INITIAL_COORDINATES.lng}`
+      syncGuestOption()
+      setDefaultCoordinates()
     })
     .setView({
       lat: INITIAL_COORDINATES.lat,
@@ -55,12 +56,17 @@ const initMap = (cards) => {
   mainPin.addTo(map).on('moveend', (evt) => {
     coordinates.value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`
   })
+  return map
+}
+
+const appendCardsToMap = (cards) => {
+  const map = initEmptyMap()
 
   cards.forEach((card) => {
     const smallPin = L.marker(
       {
-        lat: card.location.x,
-        lng: card.location.y,
+        lat: card.location.lat,
+        lng: card.location.lng,
       },
       {
         icon: PIN_ICON,
@@ -71,4 +77,11 @@ const initMap = (cards) => {
   })
 }
 
-export {initMap}
+const setDefaultCoordinates = ()=> coordinates.value = `${INITIAL_COORDINATES.lat}, ${INITIAL_COORDINATES.lng}`
+
+const resetMainMarker = () =>{
+  mainPin.setLatLng(L.latLng(INITIAL_COORDINATES.lat, INITIAL_COORDINATES.lng))
+  setDefaultCoordinates()
+}
+
+export {appendCardsToMap, initEmptyMap, mainPin, INITIAL_COORDINATES, resetMainMarker}

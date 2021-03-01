@@ -1,12 +1,22 @@
 // Main
 
 import './validation.js'
-import {setFormActivity, syncGuestOption} from'./form.js'
+import {setFormActivity} from'./form.js'
 import {setFilter} from './filter.js'
-import {initMap} from './map.js'
-import {cards} from './mock-data.js'
+import {getData} from './backend.js'
+import {appendCardsToMap, initEmptyMap} from './map.js'
+import {showMessage} from './utils.js'
 
-setFilter('map__filters--disabled', 'add')  // отключаем ыильтры
-setFormActivity('ad-form--disabled', 'add') // отключаем элементы формы
-initMap(cards)                              // инициализация карты и popup
-syncGuestOption()                           // динамическое обновление доступных гостей в зависимости от комнат
+const onSuccessRecievedData = (data) =>  {
+  appendCardsToMap(data)
+  showMessage('notification', 'success', 'Данные обновлены')
+}
+
+const onErrorRecievedData = () => {
+  initEmptyMap()
+  showMessage('notification', 'error', 'Произошла ошибка')
+}
+
+setFilter('map__filters--disabled', 'add')              // отключаем фильтры
+setFormActivity('ad-form--disabled', 'add')             // отключаем элементы формы
+getData(onSuccessRecievedData, onErrorRecievedData)     // получаем данные или инициализация карты с маркером

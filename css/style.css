@@ -928,7 +928,7 @@ fieldset {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 1000;
 
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -1027,4 +1027,28 @@ fieldset {
 
 .hidden {
   display: none;
+}
+
+.notification {
+  top: 0;
+  width: 100%;
+  height: 65px;
+  position: fixed;
+  text-align: center;
+  z-index: 1000;
+}
+
+.notification__success{
+  border: 1px solid  #808080;
+  background-color: #1b5e20
+}
+
+.notification__error {
+  border: 1px solid  #808080;
+  background-color: #b71c1c;
+}
+
+.notification > p {
+  font-size: 20px;
+  color: #fff;
 }
