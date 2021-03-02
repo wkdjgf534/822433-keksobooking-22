@@ -3,13 +3,15 @@ const MAX_CARDS = 10
 
 import './validation.js'
 import {setFormActivity} from'./form.js'
-import {setFilter} from './filter.js'
+import {setFilter, setFilterChange} from './filter.js'
 import {getData} from './backend.js'
 import {appendCardsToMap, initEmptyMap} from './map.js'
 import {showMessage} from './utils.js'
 
 const onSuccessRecievedData = (data) =>  {
-  appendCardsToMap(data.slice(0, MAX_CARDS))
+  const cards = data.slice(0, MAX_CARDS)
+  appendCardsToMap(cards)
+  setFilterChange(() => appendCardsToMap(cards))
   showMessage('notification', 'success', 'Данные обновлены')
 }
 
