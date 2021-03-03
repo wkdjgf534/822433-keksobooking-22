@@ -23,9 +23,10 @@ const setFilter = (className, action, value = true) => {
 }
 
 const selectPrice = (data) => {
+  // middle заменить на метод из lodash inRange
   switch (filterPrice.value) {
     case 'low': return data.offer.price < LOW_PRICE
-    case 'middle': return _.inRange(data.offer.price, LOW_PRICE, HIGH_PRICE)
+    case 'middle': return data.offer.price > LOW_PRICE && data.offer.price < HIGH_PRICE
     case 'high': return data.offer.price > HIGH_PRICE
     default: return true
   }
@@ -48,7 +49,7 @@ const selectGuests = (data) => {
 const selectFeatures = (data) => {
   let result = true;
 
-  filterFeatures.querySelectorAll('input:checked').forEach((item) => {
+  findAll('input:checked', filterFeatures).forEach((item) => {
     if (data.indexOf(item.value) === -1) {
       result = false
     }
@@ -67,6 +68,6 @@ const filterCards = (data) => {
   )
 }
 
-const setFilterChange = (cb) => (filter.addEventListener('change', cb))
+const onFilterHandler = (cb) => (filter.addEventListener('change', cb))
 
-export {setFilter, filterCards, setFilterChange}
+export {setFilter, filterCards, onFilterHandler}

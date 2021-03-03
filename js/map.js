@@ -38,6 +38,7 @@ const sourceMap = L.tileLayer(
 )
 
 let map = {}
+const smallPins = []
 
 const initEmptyMap = () => {
   map = L.map('map-canvas')
@@ -61,11 +62,8 @@ const initEmptyMap = () => {
   return map
 }
 
-let smallPins = []
-
 const appendCardsToMap = (cards) => {
   smallPins.forEach((pin) => pin.remove())
-  initEmptyMap()
 
   cards.filter(filterCards).forEach((card) => {
     const smallPin = L.marker(
@@ -80,7 +78,6 @@ const appendCardsToMap = (cards) => {
     smallPin.addTo(map).bindPopup(createCard(card))
     smallPins.push(smallPin)
   })
-  console.log(map)
 }
 
 const setDefaultCoordinates = ()=> coordinates.value = `${INITIAL_COORDINATES.lat}, ${INITIAL_COORDINATES.lng}`
