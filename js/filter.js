@@ -1,5 +1,4 @@
 // Filter
-/* global _:readonly */
 
 import {findOne, findAll} from './utils.js'
 const LOW_PRICE = 10000;
@@ -68,6 +67,6 @@ const filterCards = (data) => {
   )
 }
 
-const onFilterHandler = (cb) => (filter.addEventListener('change', cb))
+const onFilterChanges = (cb) => (filter.addEventListener('change', cb))
 
-export {setFilter, filterCards, onFilterHandler}
+export {setFilter, filterCards, onFilterChanges, filter}

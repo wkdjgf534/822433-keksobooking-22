@@ -4,6 +4,7 @@ import {findOne, findAll, showMessage} from './utils.js'
 import {validateInputField} from './validation.js'
 import {sendData} from './backend.js'
 import {resetMainMarker} from './map.js'
+import {filter} from './filter.js'
 
 const TYPES_TO_PRICES = {
   flat: 1000,
@@ -30,6 +31,7 @@ const checkOutElement = findOne('#timeout', form)
 const roomAmountElement = findOne('#room_number', form)
 const guestAmountElement = findOne('#capacity', form)
 const capacityOptions = findAll('option', guestAmountElement)
+const resetForm = findOne('.ad-form__reset', form)
 
 const setFormActivity = (className, action, value = true) => {
   form.classList[action](className);
@@ -43,7 +45,7 @@ const syncGuestOption = () => {
   })
 
   guestAmountElement.value = roomAmountElement.value === '100' ? '0' : roomAmountElement.value
-};
+}
 
 typeElement.addEventListener('change', () => {
   priceElement.placeholder = TYPES_TO_PRICES[typeElement.value]
@@ -62,7 +64,6 @@ const onSuccessSubmitData = () =>  {
 }
 
 const onErrorSubmitData = () => showMessage('error')
-
 
 checkInElement.addEventListener('change', setCheckingTime)
 checkOutElement.addEventListener('change', setCheckingTime)
@@ -90,5 +91,12 @@ form.addEventListener('submit', (evt) => {
   evt.preventDefault()
   sendData(onSuccessSubmitData, onErrorSubmitData, new FormData(evt.target))
 })
+
+resetForm.addEventListener('click', (evt) => {
+  evt.preventDefault()
+  form.reset()
+  filter.reset()
+  resetMainMarker()
+});
 
 export {setFormActivity, syncGuestOption, coordinates}
