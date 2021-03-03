@@ -54,12 +54,13 @@ const createCard = (item) => {
     photos,
   } = offer
 
-  // str
+  // string
   createCardEl(title, '.popup__title')
   createCardEl(avatar, '.popup__avatar')
   createCardEl(type, '.popup__type')
   createCardEl(address, '.popup__text--address')
-  // format str
+
+  // formated string
   createCardEl(null, '.popup__text--price', `${price} ₽/ночь`)
   createCardEl(
     null,
@@ -71,7 +72,7 @@ const createCard = (item) => {
     '.popup__text--time',
     `Заезд после ${checkin}, выезд до ${checkout}`,
   )
-  // arr
+  // array
   createCardEl(description, '.popup__description')
   createCardEl(features, '.popup__features')
   createCardEl(photos, '.popup__photos')

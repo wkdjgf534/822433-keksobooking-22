@@ -1,7 +1,7 @@
 // Map
 /* global L:readonly */
 
-import {setFilter} from './filter.js'
+import {setFilter, filterCards} from './filter.js'
 import {setFormActivity, syncGuestOption, coordinates} from './form.js'
 import {createCard} from './card.js'
 import {setReadOnly} from './utils.js'
@@ -37,8 +37,11 @@ const sourceMap = L.tileLayer(
   { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' },
 )
 
+let map = {}
+const smallPins = []
+
 const initEmptyMap = () => {
-  const map = L.map('map-canvas')
+  map = L.map('map-canvas')
     .on('load', () => {
       setFilter('map__filters--disabled', 'remove', false)
       setFormActivity('ad-form--disabled', 'remove', false)
@@ -60,9 +63,9 @@ const initEmptyMap = () => {
 }
 
 const appendCardsToMap = (cards) => {
-  const map = initEmptyMap()
+  smallPins.forEach((pin) => pin.remove())
 
-  cards.forEach((card) => {
+  cards.filter(filterCards).forEach((card) => {
     const smallPin = L.marker(
       {
         lat: card.location.lat,
@@ -72,8 +75,8 @@ const appendCardsToMap = (cards) => {
         icon: PIN_ICON,
       },
     )
-
     smallPin.addTo(map).bindPopup(createCard(card))
+    smallPins.push(smallPin)
   })
 }
 
