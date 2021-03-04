@@ -1,6 +1,6 @@
 // Main
 const MAX_CARDS = 10
-const ACCEPTABLE_INTERVAL = 1500
+const ACCEPTABLE_INTERVAL = 500
 
 import './validation.js'
 import {setFormActivity} from'./form.js'
