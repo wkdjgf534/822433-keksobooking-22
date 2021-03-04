@@ -30,4 +30,13 @@ const showMessage = (object, type, message) => {
   }
 }
 
-export {findOne, findAll, setReadOnly, showMessage }
+// https://www.freecodecamp.org/news/javascript-debounce-example/
+const debounceEvent = (func, delay) => {
+  let timer
+  return (...args) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => func.apply(this, args), delay)
+  }
+}
+
+export {findOne, findAll, setReadOnly, showMessage, debounceEvent }
