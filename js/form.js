@@ -2,7 +2,7 @@
 
 import {findOne, findAll, showMessage} from './utils.js'
 import {validateInputField} from './validation.js'
-import {sendData} from './apijs'
+import {sendData} from './api.js'
 import {resetMainMarker} from './map.js'
 import {filter} from './filter.js'
 
