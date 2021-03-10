@@ -1,6 +1,7 @@
 // Utils
 
 const SHOW_INTERVAL = 5000
+const DEBOUNCE_INTERVAL = 500
 
 const findOne = (selector, el = document) => el.querySelector(selector)
 
@@ -31,11 +32,11 @@ const showMessage = (object, type, message) => {
 }
 
 // https://www.freecodecamp.org/news/javascript-debounce-example/
-const debounceEvent = (func, delay) => {
+const debounceEvent = (func, delay = DEBOUNCE_INTERVAL) => {
   let timer
-  return (...args) => {
+  return (...value) => {
     clearTimeout(timer)
-    timer = setTimeout(() => func.apply(this, args), delay)
+    timer = setTimeout(() => func.apply(this, value), delay)
   }
 }
 
