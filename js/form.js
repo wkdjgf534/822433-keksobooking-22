@@ -1,7 +1,6 @@
 // Form
 
-import {findOne, findAll, showMessage} from './utils.js'
-import {validateInputField} from './validation.js'
+import {findOne, findAll, showMessage, validateInputField} from './utils.js'
 import {sendData} from './api.js'
 import {resetMainMarker} from './map.js'
 import {filter} from './filter.js'
