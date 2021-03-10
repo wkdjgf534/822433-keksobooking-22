@@ -67,6 +67,6 @@ const filterCards = (data) => {
   )
 }
 
-const onFilterChanges = (cb) => (filter.addEventListener('change', cb))
+const onFormChanges = (cb) => (['change', 'reset'].forEach(evt => filter.addEventListener(evt, cb)))
 
-export {setFilter, filterCards, onFilterChanges, filter}
+export {setFilter, filterCards, onFormChanges, filter}
