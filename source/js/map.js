@@ -1,5 +1,7 @@
 // Map
-/* global L:readonly */
+
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 
 import {setFilter, filterCards} from './filter.js'
 import {setFormActivity, syncGuestOption, coordinates} from './form.js'

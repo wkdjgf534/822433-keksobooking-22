@@ -1,6 +1,7 @@
 // Utils
 
 const SHOW_INTERVAL = 5000
+const DEBOUNCE_INTERVAL = 500
 
 const findOne = (selector, el = document) => el.querySelector(selector)
 
@@ -31,12 +32,25 @@ const showMessage = (object, type, message) => {
 }
 
 // https://www.freecodecamp.org/news/javascript-debounce-example/
-const debounceEvent = (func, delay) => {
+const debounceEvent = (func, delay = DEBOUNCE_INTERVAL) => {
   let timer
-  return (...args) => {
+  return (...value) => {
     clearTimeout(timer)
-    timer = setTimeout(() => func.apply(this, args), delay)
+    timer = setTimeout(() => func.apply(this, value), delay)
   }
 }
 
-export {findOne, findAll, setReadOnly, showMessage, debounceEvent }
+const validateInputField = (object, messages) => {
+  if (object.validity.tooShort || object.validity.rangeUnderflow) {
+    object.setCustomValidity(messages.min_error)
+  } else if (object.validity.tooLong || object.validity.rangeOverflow) {
+    object.setCustomValidity(messages.max_error)
+  } else if (object.validity.valueMissing) {
+    object.setCustomValidity('Обязательное поле')
+  } else {
+    object.setCustomValidity('')
+  }
+  object.reportValidity()
+}
+
+export {findOne, findAll, setReadOnly, showMessage, debounceEvent, validateInputField}

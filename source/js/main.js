@@ -1,10 +1,8 @@
 // Main
 const MAX_CARDS = 10
-const ACCEPTABLE_INTERVAL = 500
 
-import './validation.js'
 import {setFormActivity} from'./form.js'
-import {setFilter, onFilterChanges} from './filter.js'
+import {setFilter, onFormChanges} from './filter.js'
 import {getData} from './api.js'
 import {appendCardsToMap, initEmptyMap} from './map.js'
 import {showMessage, debounceEvent} from './utils.js'
@@ -12,7 +10,7 @@ import {showMessage, debounceEvent} from './utils.js'
 const onSuccessRecievedData = (data) =>  {
   const cards = data.slice(0, MAX_CARDS)
   appendCardsToMap(cards)
-  onFilterChanges(debounceEvent(() => appendCardsToMap(cards), ACCEPTABLE_INTERVAL))
+  onFormChanges(debounceEvent(() => appendCardsToMap(cards)))
   showMessage('notification', 'success', 'Данные обновлены')
 }
 

@@ -1,7 +1,6 @@
 // Form
 
-import {findOne, findAll, showMessage} from './utils.js'
-import {validateInputField} from './validation.js'
+import {findOne, findAll, showMessage, validateInputField} from './utils.js'
 import {sendData} from './api.js'
 import {resetMainMarker} from './map.js'
 import {filter} from './filter.js'
@@ -39,7 +38,7 @@ const setFormActivity = (className, action, value = true) => {
 }
 
 const syncGuestOption = () => {
-  const roomsOptions = GUESTS_BY_ROOM[roomAmountElement.value];
+  const roomsOptions = GUESTS_BY_ROOM[roomAmountElement.value]
   capacityOptions.forEach((element) => {
     element.hidden = roomsOptions.indexOf(element.value) === -1 ? true : false
   })
@@ -53,14 +52,19 @@ typeElement.addEventListener('change', () => {
 })
 
 const setCheckingTime = (evt) => {
-  checkInElement.value = evt.target.value;
-  checkOutElement.value = evt.target.value;
+  checkInElement.value = evt.target.value
+  checkOutElement.value = evt.target.value
+}
+
+const resetFormToDefault = () => {
+  form.reset()
+  filter.reset()
+  resetMainMarker()
 }
 
 const onSuccessSubmitData = () =>  {
   showMessage('success')
-  form.reset()
-  resetMainMarker()
+  resetFormToDefault()
 }
 
 const onErrorSubmitData = () => showMessage('error')
@@ -94,9 +98,7 @@ form.addEventListener('submit', (evt) => {
 
 resetForm.addEventListener('click', (evt) => {
   evt.preventDefault()
-  form.reset()
-  filter.reset()
-  resetMainMarker()
-});
+  resetFormToDefault()
+})
 
 export {setFormActivity, syncGuestOption, coordinates}
