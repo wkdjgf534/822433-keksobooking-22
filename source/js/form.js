@@ -39,10 +39,7 @@ const setFormActivity = (className, action, value = true) => {
 
 const syncGuestOption = () => {
   const roomsOptions = GUESTS_BY_ROOM[roomAmountElement.value]
-  capacityOptions.forEach((element) => {
-    element.hidden = roomsOptions.indexOf(element.value) === -1 ? true : false
-  })
-
+  capacityOptions.forEach((element) => element.hidden = roomsOptions.indexOf(element.value) === -1)
   guestAmountElement.value = roomAmountElement.value === '100' ? '0' : roomAmountElement.value
 }
 
@@ -76,8 +73,8 @@ roomAmountElement.addEventListener('change', () => syncGuestOption())
 titleElement.addEventListener('input', () => {
   const errorMessages =
   {
-    min_error: `Ещё ${titleElement.minLength - titleElement.value.length} символов`,
-    max_error: `Удалите лишние ${titleElement.value.length - titleElement.maxLength} символов`,
+    minError: `Ещё ${titleElement.minLength - titleElement.value.length} символов`,
+    maxError: `Удалите лишние ${titleElement.value.length - titleElement.maxLength} символов`,
   }
   validateInputField(titleElement , errorMessages)
 })
@@ -85,8 +82,8 @@ titleElement.addEventListener('input', () => {
 priceElement.addEventListener('input', () => {
   const typeOption = typeElement.options[typeElement.selectedIndex]
   const errorMessages = {
-    min_error: `Минимальная цена за ${typeOption.textContent} - ${TYPES_TO_PRICES[typeOption.value]}`,
-    max_error: `Цена превышает ${priceElement.max}`,
+    minError: `Минимальная цена за ${typeOption.textContent} - ${TYPES_TO_PRICES[typeOption.value]}`,
+    maxError: `Цена превышает ${priceElement.max}`,
   }
   validateInputField(priceElement, errorMessages)
 })
