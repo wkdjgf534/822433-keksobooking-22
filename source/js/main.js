@@ -2,7 +2,7 @@
 const MAX_CARDS = 10
 
 import {setFormActivity} from'./form.js'
-import {setFilter, onFormChanges} from './filter.js'
+import {setFilter, updateFilters} from './filter.js'
 import {getData} from './api.js'
 import {addCardsToMap, createEmptyMap} from './map.js'
 import {showMessage, debounce} from './utils.js'
@@ -10,7 +10,7 @@ import {showMessage, debounce} from './utils.js'
 const onSuccessReceivedData = (data) =>  {
   const cards = data.slice(0, MAX_CARDS)
   addCardsToMap(cards)
-  onFormChanges(debounce(() => addCardsToMap(cards)))
+  updateFilters(debounce(() => addCardsToMap(cards)))
   showMessage('notification', 'success', 'Данные обновлены')
 }
 
