@@ -53,9 +53,9 @@ const validateInputField = (object, messages) => {
   object.reportValidity()
 }
 
-const createTag = (className, tagName, source) => {
+const createTag = (classNames, tagName, source) => {
   const element = document.createElement(tagName)
-  element.classList.add(...className)
+  element.classList.add(...classNames)
 
   if (source) {
     element.src = source

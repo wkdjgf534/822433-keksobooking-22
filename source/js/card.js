@@ -29,8 +29,8 @@ const createCardEl = (offer, className, msg = '') => {
       })
     } else {
       offer.forEach((i) => {
-        const photoClass = ['popup__photo']
-        const photo = createTag(photoClass, 'img', i)
+        const photoClasses = ['popup__photo']
+        const photo = createTag(photoClasses, 'img', i)
         el.appendChild(photo)
       })
     }
