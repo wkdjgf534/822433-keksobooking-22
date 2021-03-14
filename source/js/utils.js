@@ -53,4 +53,23 @@ const validateInputField = (object, messages) => {
   object.reportValidity()
 }
 
-export {findOne, findAll, setReadOnly, showMessage, debounce, validateInputField}
+const createTag = (className, tagName, source) => {
+  const element = document.createElement(tagName)
+  element.classList.add(...className)
+
+  if (source) {
+    element.src = source
+  }
+
+  return element
+}
+
+export {
+  findOne,
+  findAll,
+  setReadOnly,
+  showMessage,
+  debounce,
+  validateInputField,
+  createTag
+}

@@ -1,6 +1,6 @@
 // Card
 
-import {findOne} from './utils.js'
+import {findOne, createTag} from './utils.js'
 
 const cardTemplate = findOne('.popup', findOne('#card').content)
 let card
@@ -23,11 +23,15 @@ const createCardEl = (offer, className, msg = '') => {
       el.textContent = offer.join(', ')
     } else if (isInclude('features')) {
       offer.forEach((i) => {
-        el.innerHTML += `<li class="popup__feature popup__feature--${i}"></li>`
+        const featureClasses = ['popup__feature', `popup__feature--${i}`]
+        const feature = createTag(featureClasses, 'li')
+        el.appendChild(feature)
       })
     } else {
       offer.forEach((i) => {
-        el.innerHTML += `<img src="${i}" class="popup__photo" alt="Фотография жилья" />`
+        const photoClass = ['popup__photo']
+        const photo = createTag(photoClass, 'img', i)
+        el.appendChild(photo)
       })
     }
   }
