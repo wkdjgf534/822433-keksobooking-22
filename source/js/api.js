@@ -5,13 +5,11 @@ const GET_SERVER_URL = `${POST_SERVER_URL}/data`
 const getData = async (onSuccess, onError) => {
   try {
     const response = await fetch(GET_SERVER_URL)
-    if (response.ok) {
-      const data = await response.json()
-      return onSuccess(data)
-    }
-    onError()
-  } catch (error) {
-    onError()
+    if (!response.ok) throw new Error(response.statusText)
+    const data = await response.json()
+    return onSuccess(data)
+  } catch (err) {
+    onError(err.message)
   }
 }
 
