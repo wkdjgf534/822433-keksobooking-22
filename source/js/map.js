@@ -4,7 +4,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 import {setFilter, filterCards} from './filter.js'
-import {setFormActivity, syncGuestOption, coordinates} from './form.js'
+import {setFormActivity, synchronizeGuestOptions, coordinates} from './form.js'
 import {createCard} from './card.js'
 import {setReadOnly} from './utils.js'
 
@@ -42,13 +42,13 @@ const sourceMap = L.tileLayer(
 let map = {}
 const smallPins = []
 
-const initEmptyMap = () => {
+const createEmptyMap = () => {
   map = L.map('map-canvas')
     .on('load', () => {
       setFilter('map__filters--disabled', 'remove', false)
       setFormActivity('ad-form--disabled', 'remove', false)
       setReadOnly(coordinates)
-      syncGuestOption()
+      synchronizeGuestOptions()
       setDefaultCoordinates()
     })
     .setView({
@@ -64,7 +64,7 @@ const initEmptyMap = () => {
   return map
 }
 
-const appendCardsToMap = (cards) => {
+const addCardsToMap = (cards) => {
   smallPins.forEach((pin) => pin.remove())
 
   cards.filter(filterCards).forEach((card) => {
@@ -89,4 +89,4 @@ const resetMainMarker = () =>{
   setDefaultCoordinates()
 }
 
-export {appendCardsToMap, initEmptyMap, mainPin, INITIAL_COORDINATES, resetMainMarker}
+export {addCardsToMap, createEmptyMap, mainPin, INITIAL_COORDINATES, resetMainMarker}

@@ -32,7 +32,7 @@ const showMessage = (object, type, message) => {
 }
 
 // https://www.freecodecamp.org/news/javascript-debounce-example/
-const debounceEvent = (func, delay = DEBOUNCE_INTERVAL) => {
+const debounce = (func, delay = DEBOUNCE_INTERVAL) => {
   let timer
   return (...value) => {
     clearTimeout(timer)
@@ -53,4 +53,4 @@ const validateInputField = (object, messages) => {
   object.reportValidity()
 }
 
-export {findOne, findAll, setReadOnly, showMessage, debounceEvent, validateInputField}
+export {findOne, findAll, setReadOnly, showMessage, debounce, validateInputField}

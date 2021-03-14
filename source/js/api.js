@@ -3,13 +3,13 @@ const POST_SERVER_URL = 'https://22.javascript.pages.academy/keksobooking'
 const GET_SERVER_URL = `${POST_SERVER_URL}/data`
 
 const getData = async (onSuccess, onError) => {
-  const response = await fetch(GET_SERVER_URL)
   try {
+    const response = await fetch(GET_SERVER_URL)
     if (response.ok) {
       const data = await response.json()
       return onSuccess(data)
     }
-    throw new Error ()
+    onError()
   } catch (error) {
     onError()
   }

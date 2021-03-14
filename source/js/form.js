@@ -37,7 +37,7 @@ const setFormActivity = (className, action, value = true) => {
   formFieldsets.forEach((fieldset) => fieldset.disabled = value )
 }
 
-const syncGuestOption = () => {
+const synchronizeGuestOptions = () => {
   const roomsOptions = GUESTS_BY_ROOM[roomAmountElement.value]
   capacityOptions.forEach((element) => element.hidden = roomsOptions.indexOf(element.value) === -1)
   guestAmountElement.value = roomAmountElement.value === '100' ? '0' : roomAmountElement.value
@@ -68,7 +68,7 @@ const onErrorSubmitData = () => showMessage('error')
 
 checkInElement.addEventListener('change', setCheckingTime)
 checkOutElement.addEventListener('change', setCheckingTime)
-roomAmountElement.addEventListener('change', () => syncGuestOption())
+roomAmountElement.addEventListener('change', () => synchronizeGuestOptions())
 
 titleElement.addEventListener('input', () => {
   const errorMessages =
@@ -98,4 +98,4 @@ resetForm.addEventListener('click', (evt) => {
   resetFormToDefault()
 })
 
-export {setFormActivity, syncGuestOption, coordinates}
+export {setFormActivity, synchronizeGuestOptions, coordinates}
